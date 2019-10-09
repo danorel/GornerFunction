@@ -13,6 +13,8 @@ public:
     void   set_coeff_range(
             double min,
             double max);
+    double getMin();
+    double getMax();
     ~GornerGenerator();
 private:
     void generate_coefficients(

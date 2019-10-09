@@ -3,12 +3,15 @@
 
 int main() {
     GornerGenerator generator = GornerGenerator();
-    std::cout << "gorner(" << 5 << ") = " << generator.calculate(5, 3) << std::endl << "gorner coefficients: ";
+    generator.set_coeff_range(-5, 5);
+    std::cout << "Coefficient number generation range: [" << generator.getMin() << "; " << generator.getMax() << "]" << std::endl;
+
+    std::cout << "gorner(" << 2 << ", " << 3 << ") = " << generator.calculate(2, 3) << std::endl << "gorner coefficients: ";
     generator.show_coefficients();
 
     std::cout << std::endl;
-    
-    std::cout << "gorner(" << 3 << ") = " << generator.calculate(3, 5) << std::endl << "gorner coefficients: ";
+
+    std::cout << "gorner(" << 3 << ", " << 5 << ") = " << generator.calculate(3, 5) << std::endl << "gorner coefficients: ";
     generator.show_coefficients();
     return 0;
 }

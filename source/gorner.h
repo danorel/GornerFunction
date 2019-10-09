@@ -8,8 +8,11 @@
 class GornerGenerator{
 public:
     GornerGenerator();
-    double calculate(double x, size_t exponent);
+    double calculate(
+            double x,
+            size_t exponent);
     void   show_coefficients();
+    void   show_range();
     void   set_coeff_range(
             double min,
             double max);
@@ -17,10 +20,12 @@ public:
     double getMax();
     ~GornerGenerator();
 private:
-    void generate_coefficients(
-            double *coefficients_vec,
+    void   generate_coefficients(
+              double *coefficients_vec,
+              size_t exponent);
+    double sum_up(
+            double x,
             size_t exponent);
-
 private:
     double *coefficients_vec;
     double min, max;

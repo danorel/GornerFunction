@@ -2,6 +2,7 @@
 // Created by Dan Orel on 2019-10-09.
 //
 #include <cstdio>
+#include <cassert>
 #include "gorner.h"
 
 GornerGenerator::GornerGenerator() {
@@ -20,10 +21,8 @@ double GornerGenerator::calculate(double x, size_t exponent) {
     generate_coefficients(
             this->coefficients_vec,
             this->exponent);
-    for(int index = exponent; index >= 0; index--){
-        gorner_result *= x;
-        gorner_result += *(this->coefficients_vec + index);
-    }
+    // Assertion step
+    assert(((x == 1) || (x == -1)) ? ( gorner_result == sum_up(x, exponent)) : true);
     return gorner_result;
 }
 
@@ -35,6 +34,10 @@ void GornerGenerator::show_coefficients(){
     } else {
         printf("exponent was not defined\n");
     }
+}
+
+void GornerGenerator::show_range() {
+    printf("Coefficient number generation range: [%.1f; %.1f]\n", this->min, this->max);
 }
 
 void GornerGenerator::set_coeff_range(double min, double max) {
@@ -56,6 +59,17 @@ void GornerGenerator::generate_coefficients(
     srand(time(NULL));
     for(int index = 0; index < exponent; index++)
         *(coefficients_vec + index) = this->min + (rand() % static_cast<int>(this->max - this->min));
+}
+
+double GornerGenerator::sum_up(double x, size_t exponent) {
+    // Initialization steps
+    double gorner_result = 0.;
+    // Calculation steps
+    for(int index = exponent; index >= 0; index--){
+        gorner_result *= x;
+        gorner_result += *(this->coefficients_vec + index);
+    }
+    return 0;
 }
 
 GornerGenerator::~GornerGenerator() {
